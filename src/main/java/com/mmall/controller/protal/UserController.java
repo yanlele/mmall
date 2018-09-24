@@ -1,5 +1,6 @@
 package com.mmall.controller.protal;
 
+import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -28,10 +29,8 @@ public class UserController {
         ServerResponse<User> response = iUserService.login(username, password);
         if(response.isSuccess()) {
             // 存入session
-
+            session.setAttribute(Const.CURRENT_USER, response.getData());
         }
-
-
-        return null;
+        return response;
     };
 }
