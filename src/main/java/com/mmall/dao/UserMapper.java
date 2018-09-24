@@ -22,4 +22,7 @@ public interface UserMapper {
     // 检查用户名和密码对不对
     // 多个参数注入的时候，要用@param注解
     User selectLogin(@Param("username") String username, @Param("password") String password);
+
+    // 校验用户邮箱是否存在
+    int checkEmail(String email);
 }
