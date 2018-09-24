@@ -12,7 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
-/*
+/**
+ * UserController class
+ *
+ * @author yanle
+ * @date 2018/09/25
+ *
+ * 其他说明：
  * @ResponseBody 这个是可以让我们的返回数据序列化为json
  */
 
@@ -66,7 +72,7 @@ public class UserController {
     }
 
     /**
-     * 事实判断用户名和邮箱
+     * 实时判断用户名和邮箱
      * @param str
      * @param type
      * @return
