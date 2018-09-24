@@ -1,11 +1,37 @@
 package com.mmall.service.impl;
 
+import com.mmall.common.ServerResponse;
+import com.mmall.dao.UserMapper;
+import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("iUserService")
 public class UserServiceImpl implements IUserService {
-    @Override
-    public Object login(String username, String password) {
+    @Autowired
+    private UserMapper userMapper;
 
-        return null;
+
+    @Override
+    public ServerResponse<User> login(String username, String password) {
+        // 获取用户明是否存在
+        int resultCount = userMapper.checkUsername(username);
+        if(resultCount ==0 ) {
+            return ServerResponse.createByErrorMessage("用户名不存在");
+        }
+
+        //todo 密码登录 DM5
+
+        User user = userMapper.selectLogin(username, password);
+        if(user == null) {
+            return ServerResponse.createByErrorMessage("密码错误");
+        }
+
+        // 返回的时候，把密码设置为空
+        user.setPassword(StringUtils.EMPTY);
+
+        return ServerResponse.createBySuccess("登录成功", user);
     }
 }
