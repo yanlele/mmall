@@ -17,3 +17,7 @@ pojo是放置的数据库映射关系文件，dao放置的是对映射文件的�
 
               
 
+### 踩坑
+- 有一个idea很坑的问题，如果我们使用扫苗注解的方式，会遇到idea报错，但是项目又是正常运行的。需要在setting更改这个配置： Autowiring for Bean Class
+
+
