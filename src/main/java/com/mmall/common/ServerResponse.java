@@ -1,8 +1,13 @@
 package com.mmall.common;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import javax.xml.ws.Response;
 import java.io.Serializable;
 
+/*这个注解表示我们在返回的时候，不要null的字段*/
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ServerResponse<T> implements Serializable {
     private int status;
     private String msg;
@@ -25,10 +30,12 @@ public class ServerResponse<T> implements Serializable {
         this.msg = msg;
     }
 
+    @JsonIgnore
     public boolean isSuccess() {
         return this.status == ResponseCode.SUCCESS.getCode();
     }
 
+    /*下面三个具有public 的方法，会在返回值中序列化为json*/
     public int getStatus() {
         return status;
     }
