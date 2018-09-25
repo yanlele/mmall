@@ -69,5 +69,26 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createBySuccessMessage("注册成功");
     }
 
-
+    public ServerResponse<String> checkValid(String str, String type) {
+        if(StringUtils.isNotBlank(type)) {
+            // 检验
+            if(Const.USERNAME.equals(type)) {
+                // 校验用户明是否存在
+                int resultCount = userMapper.checkUsername(str);
+                if(resultCount > 0 ) {
+                    return ServerResponse.createByErrorMessage("用户名存在");
+                }
+            }
+            if(Const.EMAIL.equals(type)) {
+                // 校验邮箱
+                int resultCount = userMapper.checkEmail(str);
+                if (resultCount > 0) {
+                    return ServerResponse.createByErrorMessage("邮箱已经存在");
+                }
+            }
+        } else {
+            return ServerResponse.createByErrorMessage("参数错误");
+        }
+        return ServerResponse.createByErrorMessage("校验成功");
+    }
 }
