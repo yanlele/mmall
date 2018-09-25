@@ -44,14 +44,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ServerResponse<String> register(User user) {
         // 校验用户明是否存在
-        int resultCount = userMapper.checkUsername(user.getUsername());
-        if(resultCount > 0 ) {
-            return ServerResponse.createByErrorMessage("用户名存在");
+        ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
+        if(!validResponse.isSuccess()) {
+            return validResponse;
         }
         // 校验邮箱
-        resultCount = userMapper.checkEmail(user.getEmail());
-        if (resultCount > 0) {
-            return ServerResponse.createByErrorMessage("邮箱已经存在");
+        validResponse = this.checkValid(user.getEmail(), Const.EMAIL);
+        if(!validResponse.isSuccess()) {
+            return validResponse;
         }
 
         // 赋予角色等级
@@ -60,7 +60,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
 
         //　插入数据库
-        resultCount = userMapper.insert(user);
+        int resultCount = userMapper.insert(user);
 
         if (resultCount ==  0) {
             // 插入数据库失败的情况
@@ -69,6 +69,12 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createBySuccessMessage("注册成功");
     }
 
+    /**
+     * 实时校验接口实现`
+     * @param str
+     * @param type
+     * @return
+     */
     public ServerResponse<String> checkValid(String str, String type) {
         if(StringUtils.isNotBlank(type)) {
             // 检验

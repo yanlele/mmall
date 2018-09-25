@@ -27,4 +27,11 @@ public interface IUserService {
     public ServerResponse<String> register(User user);
 
 
+    /**
+     * 实时校验接口
+     * @param str
+     * @param type
+     * @return
+     */
+    public ServerResponse<String> checkValid(String str, String type);
 }
