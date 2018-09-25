@@ -17,7 +17,7 @@
 
 
 
-### 插件的使用
+### 其他零碎知识点
 #### mybatis-generator 配置
 这个东西可以自动生成pojo, dao 和对应的xml文件               
 pojo是放置的数据库映射关系文件，dao放置的是对映射文件的调用接口， xml是映射的实现                      
@@ -35,9 +35,37 @@ spring 整合 mybatis 请见 [applicationContext-datasource.xml](./src/main/reso
 springmvc 配置 [dispatcher-servlet.xml](./src/main/webapp/WEB-INF/dispatcher-servlet.xml)
 
 web.xml 配置 [web.xml](./src/main/webapp/WEB-INF/web.xml)
+
+
+#### org.apache.commons.lang3.StringUtils
+这个包下面封装了一些列好用的字符串方法。建议去看看
+例如：
+```
+StringUtils.EMPTY
+StringUtils.isNotBlank();
+StringUtils.isNotEmpty();       // 这个认为空字符串也是正确的
+```
+
+
+
+#### java.util.UUID
+这个包封装了一些列唯一识别码的相关类内容
+比如:
+```java
+class Test {
+    public static void main(String[] args){
+        System.out.println(UUID.randomUUID().toString());     
+    }
+}
+```
+
               
 
 ### 踩坑
 - 有一个idea很坑的问题，如果我们使用扫苗注解的方式，会遇到idea报错，但是项目又是正常运行的。需要在setting更改这个配置： Autowiring for Bean Class
+
+
+
+
 
 

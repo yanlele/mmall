@@ -25,4 +25,10 @@ public interface UserMapper {
 
     // 校验用户邮箱是否存在
     int checkEmail(String email);
+
+    // 查询用户提示问题
+    String selectQuestionByUsername(String username);
+
+    // 检查用户提示问题的回答答案是否正确
+    int checkAnswer(@Param("username")String username, @Param("question")String question, @Param("answer")String answer);
 }

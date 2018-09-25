@@ -34,4 +34,22 @@ public interface IUserService {
      * @return
      */
     public ServerResponse<String> checkValid(String str, String type);
+
+
+    /**
+     * 找回密码提示问题的具体实现
+     * @param username
+     * @return
+     */
+    public ServerResponse<String> selectQuestion(String username);
+
+
+    /**
+     * 查询问题答案知否正确
+     * @param username
+     * @param question
+     * @param answer
+     * @return
+     */
+    public ServerResponse<String> checkAnswer(String username, String question, String answer);
 }
