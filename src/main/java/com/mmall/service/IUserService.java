@@ -52,4 +52,14 @@ public interface IUserService {
      * @return
      */
     public ServerResponse<String> checkAnswer(String username, String question, String answer);
+
+
+    /**
+     * 忘记密码
+     * @param username
+     * @param passwordNew
+     * @param forgetToken
+     * @return
+     */
+    public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken);
 }

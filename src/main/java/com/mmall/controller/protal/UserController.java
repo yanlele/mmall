@@ -122,7 +122,22 @@ public class UserController {
      * @param answer
      * @return
      */
+    @RequestMapping(value = "forget_check_answer.do",method = RequestMethod.POST)
+    @ResponseBody
     public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer) {
         return iUserService.checkAnswer(username, question, answer);
+    }
+
+    /**
+     * 传入用户名，密码，token修改密码
+     * @param username
+     * @param passwordNew
+     * @param forgetToken
+     * @return
+     */
+    @RequestMapping(value = "forget_reset_password.do",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken) {
+        return iUserService.forgetRestPassword(username, passwordNew, forgetToken);
     }
 }

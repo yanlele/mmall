@@ -31,4 +31,7 @@ public interface UserMapper {
 
     // 检查用户提示问题的回答答案是否正确
     int checkAnswer(@Param("username")String username, @Param("question")String question, @Param("answer")String answer);
+
+    // 更细用户密码
+    int updatePasswordByUsername(@Param("username")String username,@Param("passwordNew") String passwordNew);
 }
