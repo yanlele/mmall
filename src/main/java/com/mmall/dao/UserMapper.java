@@ -12,8 +12,10 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
+    // 这个是有选择性的更新，那个不为空，就更新那个， 为空的不更新
     int updateByPrimaryKeySelective(User record);
 
+    // 这个是强制更新，不管是否为空，直接都更新上去
     int updateByPrimaryKey(User record);
 
     // 校验用户是否存在
@@ -34,4 +36,7 @@ public interface UserMapper {
 
     // 更细用户密码
     int updatePasswordByUsername(@Param("username")String username,@Param("passwordNew") String passwordNew);
+
+    // 验证密码是这个用户的
+    int checkPassword(@Param("password")String password, @Param("userId")Integer userId);
 }

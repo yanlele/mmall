@@ -62,4 +62,14 @@ public interface IUserService {
      * @return
      */
     public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken);
+
+
+    /**
+     * 登录状态下修改密码的实现
+     * @param passwordOld
+     * @param passwordNew
+     * @param user
+     * @return
+     */
+    public ServerResponse<String> resetPassword(String passwordOld, String passwordNew, User user);
 }
