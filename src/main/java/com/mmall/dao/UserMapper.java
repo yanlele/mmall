@@ -39,4 +39,7 @@ public interface UserMapper {
 
     // 验证密码是这个用户的
     int checkPassword(@Param("password")String password, @Param("userId")Integer userId);
+
+    // 通过email 和 userId 验证是否存在
+    int checkEmailByUserId(@Param("email")String email, @Param("userId")Integer userId);
 }

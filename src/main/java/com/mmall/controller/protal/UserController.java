@@ -159,4 +159,34 @@ public class UserController {
         }
         return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
+
+
+    /**
+     * 更新用户信息
+     * @param session
+     * @param user
+     * @return
+     */
+    public ServerResponse<User> updateInformation(HttpSession session, User user) {
+        // 查看用户是否登录
+        User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
+        if(currentUser == null) {
+            return ServerResponse.createByErrorMessage("用户没有登录");
+        }
+        user.setId(currentUser.getId());
+        user.setUsername(currentUser.getUsername());
+
+        // 更新用户操作
+        ServerResponse<User> response = iUserService.updateInformation(user);
+
+        // 更新缓存信息
+        if(response.isSuccess()) {
+            // 不能更新用户名
+            response.getData().setUsername(currentUser.getUsername());
+            session.setAttribute(Const.CURRENT_USER, response.getData());
+        }
+        return response;
+    }
+
+
 }
