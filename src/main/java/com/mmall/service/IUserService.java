@@ -24,7 +24,7 @@ public interface IUserService {
      * @param user
      * @return
      */
-    public ServerResponse<String> register(User user);
+    public ServerResponse register(User user);
 
 
     /**

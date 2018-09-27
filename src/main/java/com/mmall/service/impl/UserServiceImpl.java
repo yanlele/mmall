@@ -52,7 +52,7 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public ServerResponse<String> register(User user) {
+    public ServerResponse register(User user) {
         // 校验用户明是否存在
         ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
         if (!validResponse.isSuccess()) {
