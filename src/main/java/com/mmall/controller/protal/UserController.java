@@ -1,6 +1,7 @@
 package com.mmall.controller.protal;
 
 import com.mmall.common.Const;
+import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -167,6 +168,8 @@ public class UserController {
      * @param user
      * @return
      */
+    @RequestMapping(value = "update_information.do",method = RequestMethod.POST)
+    @ResponseBody
     public ServerResponse<User> updateInformation(HttpSession session, User user) {
         // 查看用户是否登录
         User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
@@ -188,5 +191,18 @@ public class UserController {
         return response;
     }
 
-
+    /**
+     * 查询用户信息
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_information.do",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<User> getUserInformation(HttpSession session) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if(currentUser == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "没有登录，需要强制登录");
+        }
+        return iUserService.getInformation(currentUser.getId());
+    }
 }

@@ -82,5 +82,10 @@ public interface IUserService {
     public ServerResponse<User> updateInformation(User user);
 
 
-
+    /**
+     * 查询用户信息
+     * @param userId
+     * @return
+     */
+    public ServerResponse<User> getInformation(Integer userId);
 }
