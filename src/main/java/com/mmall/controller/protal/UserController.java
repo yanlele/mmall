@@ -62,7 +62,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session) {
         session.removeAttribute(Const.CURRENT_USER);
-        return ServerResponse.createBySuccess();
+        return ServerResponse.createBySuccessMessage("退出登录成功");
     }
 
     /**
@@ -91,11 +91,11 @@ public class UserController {
     }
 
     /**
-     * 获取用户信息
+     * 获取用户信息, 从缓存中获取用户信息
      * @param session
      * @return
      */
-    @RequestMapping(value = "get_user_info.do", method = RequestMethod.GET)
+    @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
