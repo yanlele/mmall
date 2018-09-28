@@ -50,7 +50,7 @@ public class ServerResponse<T> implements Serializable {
 
     /*返回成功的情况*/
     public static <T> ServerResponse<T> createBySuccess() {
-        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode());
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDesc());
     }
     public static <T> ServerResponse<T> createBySuccessMessage(String msg) {
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), msg);
