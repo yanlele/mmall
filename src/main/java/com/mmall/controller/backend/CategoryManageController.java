@@ -37,16 +37,40 @@ public class CategoryManageController {
     @ResponseBody
     public ServerResponse addCategory(HttpSession session, String categoryName, @RequestParam(value = "parentId", defaultValue = "0") int parentId) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-        if(currentUser == null) {
+        // 校验是否登录 是否是管理员
+        ServerResponse checkResult =  checkFunction(session, currentUser);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+        return iCategoryService.addCategory(categoryName, parentId);
+    }
+
+    // 修改种类名称
+    public ServerResponse setCategoryName(HttpSession session, Integer categoryId, String categoryName) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        ServerResponse checkResult = checkFunction(session, currentUser);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+        // 检查是否是管理员
+        return iCategoryService.updateCategoryName(categoryName, categoryId);
+    }
+
+
+    /**
+     * 校验是否登录 是否是管理员
+     * @param session
+     * @param user
+     * @return
+     */
+    private ServerResponse checkFunction(HttpSession session, User user) {
+        if(user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户没有登录，请先登录");
         }
-
-        // 检查是否是管理员
-        if(iUserService.checkAdmin(currentUser).isSuccess()) {
-            // 是管理员就可以添加分类
-            return iCategoryService.addCategory(categoryName, parentId);
-        } else {
+        // 检验是否是管理员
+        if(!iUserService.checkAdmin(user).isSuccess()) {
             return ServerResponse.createByErrorMessage("不是管理员，没有权限操作");
         }
+        return ServerResponse.createBySuccessMessage("验证通过");
     }
 }
