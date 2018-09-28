@@ -45,7 +45,15 @@ public class CategoryManageController {
         return iCategoryService.addCategory(categoryName, parentId);
     }
 
-    // 修改种类名称
+    /**
+     * 修改种类名称
+     * @param session
+     * @param categoryId
+     * @param categoryName
+     * @return
+     */
+    @RequestMapping("set_category_name.do")
+    @ResponseBody
     public ServerResponse setCategoryName(HttpSession session, Integer categoryId, String categoryName) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         ServerResponse checkResult = checkFunction(session, currentUser);
