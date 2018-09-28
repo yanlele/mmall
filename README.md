@@ -16,9 +16,45 @@
 
 
 
+## 分类管理模块
 
-### 其他零碎知识点
-#### mybatis-generator 配置
+### 介绍
+获取节点、添加节点、修改名称、获取分类ID、递归子节点ID
+
+难点： 封装无线层级的树状数据结构、递归算法、处理复杂对象排重
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 其他零碎知识点
+### mybatis-generator 配置
 这个东西可以自动生成pojo, dao 和对应的xml文件               
 pojo是放置的数据库映射关系文件，dao放置的是对映射文件的调用接口， xml是映射的实现                      
 
@@ -37,7 +73,7 @@ springmvc 配置 [dispatcher-servlet.xml](./src/main/webapp/WEB-INF/dispatcher-s
 web.xml 配置 [web.xml](./src/main/webapp/WEB-INF/web.xml)
 
 
-#### org.apache.commons.lang3.StringUtils
+### org.apache.commons.lang3.StringUtils
 这个包下面封装了一些列好用的字符串方法。建议去看看
 例如：
 ```
@@ -48,7 +84,7 @@ StringUtils.isNotEmpty();       // 这个认为空字符串也是正确的
 
 
 
-#### java.util.UUID
+### java.util.UUID
 这个包封装了一些列唯一识别码的相关类内容
 比如:
 ```java
