@@ -25,6 +25,18 @@
 
 
 
+## 商品管理模块
+### 介绍
+商品列表、商品搜索、图片上传、富文本上传、商品详情、商品下架、增加商品、更新商品
+
+难点： 
+Ftp服务的对接、SpringMvc文件上传、流读取Properties配置文件、抽象POJO、BO、VO之间的转换关系遗迹思路、joda-time快速入门、
+静态模块、mybatis-pageHelper使用、MyBatis对List遍历的实现、Mybaits对where语句动态拼接的几个版本；
+        
+
+
+
+
 
 
 
