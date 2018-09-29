@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
         Category category = new Category();
         category.setName(categoryName);
-        category.setId(parentId);
+        category.setParentId(parentId);
         category.setStatus(true);       // 为 true 说明这个分类可以用
 
         int rowCount = categoryMapper.insert(category);
