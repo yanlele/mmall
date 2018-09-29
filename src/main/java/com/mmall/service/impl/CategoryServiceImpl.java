@@ -5,11 +5,14 @@ import com.mmall.common.ServerResponse;
 import com.mmall.dao.CategoryMapper;
 import com.mmall.pojo.Category;
 import com.mmall.service.ICategoryService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("iCategoryService")
 public class CategoryServiceImpl implements ICategoryService {
@@ -55,12 +58,26 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         Category category = new Category();
         category.setId(categoryId);
-        category.setId(categoryId);
+        category.setName(categoryName);
 
         int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
         if(rowCount > 0) {
             return ServerResponse.createBySuccessMessage("更新种类名称成功");
         }
         return ServerResponse.createByErrorMessage("更新种类名称失败");
+    }
+
+
+    /**
+     * 获取当前节点的子元素
+     * @param categoryId
+     * @return
+     */
+    public ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId) {
+        List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
+        if(CollectionUtils.isEmpty(categoryList)) {
+            logger.info("没有找到当前分类的子类");
+        }
+        return ServerResponse.createBySuccess(categoryList);
     }
 }

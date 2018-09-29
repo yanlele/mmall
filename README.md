@@ -82,6 +82,12 @@ StringUtils.isNotBlank();
 StringUtils.isNotEmpty();       // 这个认为空字符串也是正确的
 ```
 
+### org.springframework.util.CollectionUtils 和 org.apache.commons.collections.CollectionUtils;
+
+### org.slf4j.Logger 日志
+
+
+
 
 
 ### java.util.UUID

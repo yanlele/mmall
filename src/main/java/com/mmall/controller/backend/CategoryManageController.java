@@ -38,7 +38,7 @@ public class CategoryManageController {
     public ServerResponse addCategory(HttpSession session, String categoryName, @RequestParam(value = "parentId", defaultValue = "0") int parentId) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         // 校验是否登录 是否是管理员
-        ServerResponse checkResult =  checkFunction(session, currentUser);
+        ServerResponse checkResult =  checkFunction(currentUser);
         if(!checkResult.isSuccess()) {
             return checkResult;
         }
@@ -56,7 +56,7 @@ public class CategoryManageController {
     @ResponseBody
     public ServerResponse setCategoryName(HttpSession session, Integer categoryId, String categoryName) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-        ServerResponse checkResult = checkFunction(session, currentUser);
+        ServerResponse checkResult = checkFunction(currentUser);
         if(!checkResult.isSuccess()) {
             return checkResult;
         }
@@ -66,12 +66,27 @@ public class CategoryManageController {
 
 
     /**
-     * 校验是否登录 是否是管理员
+     * 获取当前分类
      * @param session
+     * @param categoryId
+     * @return
+     */
+    public ServerResponse getChildrenParallelCategory(HttpSession session, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        ServerResponse checkResult = checkFunction(currentUser);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+        return iCategoryService.getChildrenParallelCategory(categoryId);
+    }
+
+
+    /**
+     * 校验是否登录 是否是管理员
      * @param user
      * @return
      */
-    private ServerResponse checkFunction(HttpSession session, User user) {
+    private ServerResponse checkFunction(User user) {
         if(user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户没有登录，请先登录");
         }
