@@ -10,6 +10,7 @@ import com.mmall.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,7 +34,7 @@ public class CategoryManageController {
      * @param parentId
      * @return
      */
-    @RequestMapping("add_category.do")
+    @RequestMapping(value = "add_category.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse addCategory(HttpSession session, String categoryName, @RequestParam(value = "parentId", defaultValue = "0") int parentId) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
@@ -52,7 +53,7 @@ public class CategoryManageController {
      * @param categoryName
      * @return
      */
-    @RequestMapping("set_category_name.do")
+    @RequestMapping(value = "set_category_name.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse setCategoryName(HttpSession session, Integer categoryId, String categoryName) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
@@ -83,7 +84,14 @@ public class CategoryManageController {
     }
 
 
-    // 深度查询子分类的节点id
+    /**
+     * 深度查询子分类的节点id
+     * @param session
+     * @param categoryId
+     * @return
+     */
+    @RequestMapping("get_deep_category.do")
+    @ResponseBody
     public ServerResponse getCategoryAndDeepChildrenCategory(HttpSession session,  @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         ServerResponse checkResult = checkFunction(currentUser);
