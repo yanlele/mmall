@@ -71,6 +71,8 @@ public class CategoryManageController {
      * @param categoryId
      * @return
      */
+    @RequestMapping("get_category.do")
+    @ResponseBody
     public ServerResponse getChildrenParallelCategory(HttpSession session, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         ServerResponse checkResult = checkFunction(currentUser);
@@ -78,6 +80,17 @@ public class CategoryManageController {
             return checkResult;
         }
         return iCategoryService.getChildrenParallelCategory(categoryId);
+    }
+
+
+    // 深度查询子分类的节点id
+    public ServerResponse getCategoryAndDeepChildrenCategory(HttpSession session,  @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        ServerResponse checkResult = checkFunction(currentUser);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+        return iCategoryService.selectCategoryAndChildrenById(categoryId);
     }
 
 
