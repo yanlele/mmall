@@ -75,7 +75,13 @@ public class ProductManageController {
     }
 
 
-    // 分页查询列表
+    /**
+     * 分页查询列表
+     * @param session
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("list.do")
     @ResponseBody
     public ServerResponse getList(HttpSession session,
@@ -91,6 +97,33 @@ public class ProductManageController {
         return iProductService.getProductList(pageNum, pageSize);
     }
 
+
+    /**
+     * 根据商品名称搜索商品
+     * @param session
+     * @param productName
+     * @param productId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("search.do")
+    @ResponseBody
+    public ServerResponse productSearch(HttpSession session,
+                                        String productName,
+                                        Integer productId,
+                                        @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                        @RequestParam(value = "pageSize",defaultValue = "10") int pageSize
+                                        ) {
+        User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
+        ServerResponse checkResult = checkFunction(currentUser);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+        return iProductService.searchProduct(productName,productId,pageNum,pageSize);
+    }
+
+    // 其实后面还有两个接口，一个是上传图片，还有一个是富文本保存。这个留作以后再来实现
 
 
 

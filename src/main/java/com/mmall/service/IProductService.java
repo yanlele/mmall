@@ -37,4 +37,14 @@ public interface IProductService {
      * @return
      */
     public ServerResponse<PageInfo> getProductList(Integer pageNum, Integer pageSize);
+
+    /**
+     * 商品搜索
+     * @param productName
+     * @param productId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public ServerResponse<PageInfo> searchProduct(String productName, Integer productId, Integer pageNum, Integer pageSize);
 }
