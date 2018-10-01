@@ -44,6 +44,18 @@ public class ProductManageController {
         return iProductService.saveOrUpdateProduct(product);
     }
 
+    //　设置商品状态
+    public ServerResponse setSaleStatus(HttpSession session, Integer productId, Integer status) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        ServerResponse checkResult = checkFunction(currentUser);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+
+        // 业务逻辑部分
+        return iProductService.setSaleStatus(productId, status);
+    }
+
 
 
     /**

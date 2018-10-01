@@ -11,4 +11,12 @@ public interface IProductService {
      * @return
      */
     public ServerResponse saveOrUpdateProduct(Product product);
+
+    /**
+     * 修改商品状态
+     * @param productId
+     * @param status
+     * @return
+     */
+    public ServerResponse setSaleStatus(Integer productId, Integer status);
 }
