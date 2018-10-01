@@ -45,6 +45,8 @@ public class ProductManageController {
     }
 
     //　设置商品状态
+    @RequestMapping(value = "set_sale_status.do", method = RequestMethod.POST)
+    @ResponseBody
     public ServerResponse setSaleStatus(HttpSession session, Integer productId, Integer status) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         ServerResponse checkResult = checkFunction(currentUser);
@@ -55,6 +57,26 @@ public class ProductManageController {
         // 业务逻辑部分
         return iProductService.setSaleStatus(productId, status);
     }
+
+
+    // 查询详情
+    @RequestMapping("detail.do")
+    @ResponseBody
+    public ServerResponse getDetail(HttpSession session, Integer productId) {
+        User userCurrent = (User) session.getAttribute(Const.CURRENT_USER);
+        ServerResponse checkResult = checkFunction(userCurrent);
+        if(!checkResult.isSuccess()) {
+            return checkResult;
+        }
+
+        // 业务逻辑
+        return iProductService.manageProductDetail(productId);
+    }
+
+
+
+
+
 
 
 

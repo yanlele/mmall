@@ -19,4 +19,11 @@ public interface IProductService {
      * @return
      */
     public ServerResponse setSaleStatus(Integer productId, Integer status);
+
+    /**
+     * 查看商品详情
+     * @param productId
+     * @return
+     */
+    public ServerResponse<Product> manageProductDetail(Integer productId);
 }

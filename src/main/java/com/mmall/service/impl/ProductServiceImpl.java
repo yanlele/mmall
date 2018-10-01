@@ -67,4 +67,17 @@ public class ProductServiceImpl implements IProductService {
         }
         return ServerResponse.createByErrorMessage("更改商品销售状态失败");
     }
+
+    // 查询商品详情
+    public ServerResponse<Product> manageProductDetail(Integer productId) {
+        if(productId == null) {
+            return ServerResponse.createByErrorMessage("没有传入商品ID");
+        }
+        Product product = productMapper.selectByPrimaryKey(productId);
+        if(product == null) {
+            return ServerResponse.createByErrorMessage("商品已经下架或者已经被删除");
+        }
+        // todo 写一个productDetailVo
+        return null;
+    }
 }
