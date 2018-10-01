@@ -2,6 +2,7 @@ package com.mmall.service;
 
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Product;
+import com.mmall.vo.ProductDetailVo;
 
 public interface IProductService {
 
@@ -25,5 +26,5 @@ public interface IProductService {
      * @param productId
      * @return
      */
-    public ServerResponse<Product> manageProductDetail(Integer productId);
+    public ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
 }
